@@ -11,6 +11,25 @@
     --font-serif: 'Instrument Serif', serif;
 }
 
+/* Custom Scrollbar - Advanced Level */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--primary-green), var(--accent-orange));
+    border-radius: 100px;
+    border: 3px solid var(--black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-green);
+}
+
 /* Global Styles */
 body {
     font-family: var(--font-primary);
@@ -1062,15 +1081,15 @@ body {
     }
 
     .navbar-collapse {
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(20px);
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(25px);
         padding: 40px 20px;
         position: fixed;
         top: 0;
         right: -100%;
         width: 100%;
         height: 100vh;
-        transition: 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+        transition: 0.8s cubic-bezier(0.85, 0, 0.15, 1);
         display: flex !important;
         flex-direction: column;
         align-items: center;
@@ -1078,6 +1097,21 @@ body {
         z-index: 1000;
         opacity: 0;
         visibility: hidden;
+    }
+
+    .navbar-collapse::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        background: var(--primary-green);
+        filter: blur(180px);
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: -1;
     }
 
     .navbar-collapse.show {
@@ -1089,33 +1123,36 @@ body {
     .navbar-toggler {
         z-index: 1100;
         border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
         padding: 0;
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .navbar-toggler-icon {
         background-image: none !important;
-        width: 100%;
+        width: 24px;
         height: 2px;
         background: var(--white);
         display: block;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: 0.3s;
+        position: relative;
+        transition: 0.4s cubic-bezier(0.85, 0, 0.15, 1);
     }
 
     .navbar-toggler-icon::before,
     .navbar-toggler-icon::after {
         content: '';
-        width: 100%;
+        width: 32px;
         height: 2px;
         background: var(--white);
         position: absolute;
-        left: 0;
-        transition: 0.3s;
+        left: -4px;
+        transition: 0.4s cubic-bezier(0.85, 0, 0.15, 1);
     }
 
     .navbar-toggler-icon::before {
@@ -1124,6 +1161,8 @@ body {
 
     .navbar-toggler-icon::after {
         top: 10px;
+        width: 20px;
+        left: 0;
     }
 
     .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
@@ -1133,11 +1172,21 @@ body {
     .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
         transform: rotate(45deg);
         top: 0;
+        width: 30px;
+        left: -3px;
     }
 
     .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
         transform: rotate(-45deg);
         top: 0;
+        width: 30px;
+        left: -3px;
+    }
+
+    .navbar-toggler:hover .navbar-toggler-icon,
+    .navbar-toggler:hover .navbar-toggler-icon::before,
+    .navbar-toggler:hover .navbar-toggler-icon::after {
+        background: var(--primary-green);
     }
 
     .nav-item {
@@ -1317,7 +1366,8 @@ body {
 
 @media (max-width: 576px) {
     .hero-title {
-        font-size: 2.6rem !important;
+        font-size: 2.2rem !important;
+        letter-spacing: -1px;
     }
 
     .display-3, .display-4 {
