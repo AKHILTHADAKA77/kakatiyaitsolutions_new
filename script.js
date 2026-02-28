@@ -95,18 +95,52 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSlide = 0;
 
     function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
-        
-        // Update counter
-        const currentIndexSpan = document.querySelector('.current-index');
-        if (currentIndexSpan) {
-            currentIndexSpan.textContent = (index + 1).toString().padStart(2, '0');
+        // First, fade out current active slide
+        const currentActive = document.querySelector('.testimonial-slide.active');
+        if (currentActive) {
+            currentActive.style.opacity = '0';
+            currentActive.style.transform = 'translateX(-20px)';
+            currentActive.style.transition = '0.5s cubic-bezier(0.7, 0, 0.3, 1)';
         }
 
-        // Re-trigger AOS for the new slide
-        AOS.refresh();
+        setTimeout(() => {
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.opacity = '';
+                slide.style.transform = '';
+                slide.style.transition = '';
+            });
+            
+            slides[index].classList.add('active');
+            
+            // Update counter
+            const currentIndexSpan = document.querySelector('.current-index');
+            if (currentIndexSpan) {
+                currentIndexSpan.textContent = (index + 1).toString().padStart(2, '0');
+            }
+
+            // Re-trigger AOS for the new slide
+            AOS.refresh();
+        }, currentActive ? 300 : 0);
     }
+
+    // Magnetic Button Effect for Nav Arrows
+    const magneticBtns = document.querySelectorAll('.btn-premium-nav');
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.1)`;
+            btn.querySelector('svg').style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+            btn.querySelector('svg').style.transform = '';
+        });
+    });
 
     if (nextBtns) {
         nextBtns.forEach(btn => {
