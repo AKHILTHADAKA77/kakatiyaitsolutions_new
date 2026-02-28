@@ -92,12 +92,28 @@ section {
     margin: 0 15px;
     opacity: 0.7;
     transition: 0.3s;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
 }
 
 .nav-link:hover,
 .nav-link.active {
     opacity: 1;
     color: var(--primary-green) !important;
+}
+
+@media (min-width: 992px) {
+    .navbar-nav .nav-link {
+        color: var(--white) !important;
+        opacity: 1 !important;
+    }
+    .navbar-collapse {
+        visibility: visible !important;
+        opacity: 1 !important;
+        clip-path: none !important;
+    }
+    .navbar-nav .nav-link:hover {
+        color: var(--primary-green) !important;
+    }
 }
 
 /* Hero Section */

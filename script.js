@@ -51,8 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // SplitType and GSAP for Menu
     const splitLinks = new SplitType('.split-text', { types: 'chars' });
     
-    // Hide chars initially for animation
-    gsap.set('.char', { y: 100, opacity: 0 });
+    // Hide chars initially for animation if on mobile
+    if (window.innerWidth <= 991) {
+        gsap.set('.char', { y: 100, opacity: 0 });
+    }
 
     const navbarCollapse = document.getElementById('navbarNav');
     navbarCollapse.addEventListener('show.bs.collapse', function () {
@@ -102,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const link = item.querySelector('.nav-link');
 
         item.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 991) return;
             // Magnetic lift for the whole link
             gsap.to(link, {
                 y: -5,
@@ -123,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         item.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 991) return;
             gsap.to(link, {
                 y: 0,
                 scale: 1,
