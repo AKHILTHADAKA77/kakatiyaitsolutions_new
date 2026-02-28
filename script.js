@@ -48,6 +48,57 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    // SplitType and GSAP for Menu
+    const splitLinks = new SplitType('.split-text', { types: 'chars' });
+    
+    // Hide chars initially for animation
+    gsap.set('.char', { y: 100, opacity: 0 });
+
+    const navbarCollapse = document.getElementById('navbarNav');
+    navbarCollapse.addEventListener('show.bs.collapse', function () {
+        gsap.to('.char', {
+            y: 0,
+            opacity: 1,
+            stagger: 0.02,
+            delay: 0.2,
+            duration: 0.5,
+            ease: "power4.out"
+        });
+    });
+
+    navbarCollapse.addEventListener('hide.bs.collapse', function () {
+        gsap.to('.char', {
+            y: -100,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power4.in"
+        });
+    });
+
+    // Hover animation for menu items
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const chars = item.querySelectorAll('.char');
+            gsap.to(chars, {
+                y: -10,
+                stagger: 0.02,
+                duration: 0.3,
+                color: '#bdf500',
+                ease: "power2.out"
+            });
+        });
+        item.addEventListener('mouseleave', () => {
+            const chars = item.querySelectorAll('.char');
+            gsap.to(chars, {
+                y: 0,
+                stagger: 0.02,
+                duration: 0.3,
+                color: '#ffffff',
+                ease: "power2.in"
+            });
+        });
+    });
+
     window.addEventListener('scroll', () => {
         let current = '';
         sections.forEach(section => {
