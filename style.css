@@ -1265,6 +1265,7 @@ section {
         text-align: center;
         margin: 10px 0;
         overflow: hidden;
+        perspective: 1000px;
     }
 
     .navbar-collapse.show .nav-item {

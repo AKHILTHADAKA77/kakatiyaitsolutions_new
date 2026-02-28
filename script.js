@@ -96,26 +96,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Hover animation for menu items
+    // Advanced Hover animation for menu items
     document.querySelectorAll('.nav-item').forEach(item => {
+        const chars = item.querySelectorAll('.char');
+        const link = item.querySelector('.nav-link');
+
         item.addEventListener('mouseenter', () => {
-            const chars = item.querySelectorAll('.char');
-            gsap.to(chars, {
-                y: -10,
-                stagger: 0.02,
+            // Magnetic lift for the whole link
+            gsap.to(link, {
+                y: -5,
+                scale: 1.05,
                 duration: 0.3,
-                color: '#bdf500',
                 ease: "power2.out"
             });
+
+            // Advanced character animation
+            gsap.to(chars, {
+                y: -15,
+                scale: 1.2,
+                rotationX: 360, // 3D flip
+                stagger: 0.03,
+                duration: 0.6,
+                color: '#bdf500',
+                ease: "back.out(2)"
+            });
         });
+
         item.addEventListener('mouseleave', () => {
-            const chars = item.querySelectorAll('.char');
+            gsap.to(link, {
+                y: 0,
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.inOut"
+            });
+
             gsap.to(chars, {
                 y: 0,
+                scale: 1,
+                rotationX: 0,
                 stagger: 0.02,
-                duration: 0.3,
+                duration: 0.4,
                 color: '#ffffff',
-                ease: "power2.in"
+                ease: "power2.inOut"
             });
         });
     });
