@@ -1138,7 +1138,7 @@ section {
     .navbar-collapse {
         background: rgba(0, 0, 0, 0.98);
         backdrop-filter: blur(25px);
-        padding: 40px 20px;
+        padding: 80px 40px;
         position: fixed;
         top: 0;
         right: 0;
@@ -1146,7 +1146,7 @@ section {
         height: 100vh;
         display: flex !important;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         z-index: 1000;
         opacity: 0;
@@ -1262,7 +1262,7 @@ section {
 
     .nav-item {
         width: 100%;
-        text-align: center;
+        text-align: left;
         margin: 10px 0;
         overflow: hidden;
         perspective: 1000px;
