@@ -56,22 +56,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const navbarCollapse = document.getElementById('navbarNav');
     navbarCollapse.addEventListener('show.bs.collapse', function () {
-        gsap.to('.char', {
-            y: 0,
-            opacity: 1,
-            stagger: 0.02,
-            delay: 0.2,
-            duration: 0.5,
-            ease: "power4.out"
+        // Animate background reveal
+        gsap.to(navbarCollapse, {
+            clipPath: "circle(150% at 90% 45px)",
+            duration: 0.8,
+            ease: "expo.inOut"
         });
+
+        // Animate characters
+        gsap.fromTo('.char', 
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                stagger: 0.02,
+                delay: 0.3,
+                duration: 0.8,
+                ease: "power4.out"
+            }
+        );
     });
 
     navbarCollapse.addEventListener('hide.bs.collapse', function () {
+        // Animate characters out
         gsap.to('.char', {
-            y: -100,
+            y: -30,
             opacity: 0,
-            duration: 0.3,
-            ease: "power4.in"
+            stagger: 0.01,
+            duration: 0.4,
+            ease: "power2.in"
+        });
+
+        // Animate background hide
+        gsap.to(navbarCollapse, {
+            clipPath: "circle(0% at 90% 45px)",
+            duration: 0.6,
+            delay: 0.2,
+            ease: "expo.inOut"
         });
     });
 
